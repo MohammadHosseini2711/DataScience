@@ -9,3 +9,4 @@
 8. Run `git add .`
 9. Run `git commit -m "xxxxxx your comment"`
 10. Run `git push -u origin main`
+11. For subsequent changes, repeat 8 to 10.
