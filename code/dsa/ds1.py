@@ -26,14 +26,32 @@ print(f'one dimension array:\n{one_dim}')
 
 # imagine it as a n*m grid of boxes in a surface
 two_dim=np.array([
-    [1,2,3,4],[6,7,8,9]
+    [1,2,3,4],
+    [6,7,8,9]
 ])
 print(f'two dimension array:\n{two_dim}')
 
 # imagine it as a (n*m)*k grid of boxes in a Volume
-three_dim=np.array([[
-    [[1,2,3,4],[6,7,8,9]],[[10,11,12,13],[14,15,16,17]]
-]])
+three_dim=np.array([
+    [
+        [1,2,3,4],
+        [6,7,8,9]
+    ],
+    [
+        [1,2,3,4],
+        [6,7,8,9]
+    ],
+    [
+        [1,2,3,4],
+        [6,7,8,9]
+    ]
+
+])
 print(f'two dimension array:\n{three_dim}')
 
 
+array = three_dim
+print(f'Shape: {array.shape}')
+print(f'Number of axis: {array.ndim}')
+print(f'Size: {array.size}')
+print(f'Data type: {array.dtype}')
