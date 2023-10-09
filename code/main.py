@@ -4,7 +4,8 @@ def main():
     # introduce_numpy_array()
     # numpy_anatomy()
     # create_numpy_array_from_python_collection()
-    create_numpy_array_from_functions()
+    # create_numpy_array_from_functions()
+    create_numpy_array_from_special_functions()
 
 if __name__ == "__main__":
     main()

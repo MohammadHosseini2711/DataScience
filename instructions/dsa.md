@@ -1,3 +1,16 @@
+- [Python collection types](#python-collection-types)
+  - [List](#list)
+  - [Set](#set)
+  - [Tuple](#tuple)
+  - [Dictionary](#dictionary)
+- [Numpy array](#numpy-array)
+  - [Anatomy of Numpy array](#anatomy-of-numpy-array)
+  - [Create](#create)
+    - [From python data types](#from-python-data-types)
+    - [From Numpy functions](#from-numpy-functions)
+    - [From special functions](#from-special-functions)
+  - [indexing and slicing](#indexing-and-slicing)
+
 ## Python collection types
 
 ### List
@@ -87,3 +100,6 @@ eye = np.eye(4, k=1)
 # rand
 rand = np.random.rand(3,2)
 ```
+
+### indexing and slicing
+

@@ -96,6 +96,20 @@ def create_numpy_array_from_functions():
     print(f'nparray indices i(row) for 2x2 tensor:\n {i}')
     print(f'nparray indices j(column) for 2x2 tensor:\n {j}')
 
+def create_numpy_array_from_special_functions():
+    # diagonal array
+    diagonal = np.diag([1, 2, 3], k=0)
+    # identity 
+    identity = np.identity(3)
+    # eye
+    eye = np.eye(4, k=-1)
+    # rand
+    rand = np.random.rand(3,2)
+
+    print(f'nparray diagonal array:\n {diagonal}')
+    print(f'nparray idintity array:\n {identity}')
+    print(f'nparray eye form array with k=(-3..3)):\n {eye}')
+    print(f'nparray random array:\n {rand}')
 
 
 
