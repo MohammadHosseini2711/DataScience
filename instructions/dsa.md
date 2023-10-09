@@ -14,9 +14,32 @@
 ## Python collection types
 
 ### List
+```Python
+# List data structure
+list = [1,2,3,4]
+print(f'List data structue example\n{list}')
+```
 ### Set
+```Python
+# Set data structure : duplicate values are not allowed
+set = {1,2,3,3}
+print(f'Set data structue example\n{set}')
+```
 ### Tuple
+```Python
+# Tuple data structure
+tuple = (1,2)
+print(f'Tuple data structue example\n{tuple}')
+tuple = ("a", "b", "c")
+print(f'Tuple data structue example\n{tuple}')
+```
 ### Dictionary
+Fast search data structure
+```Python
+# Dictionary data strucrure : Key:Value
+dict = {"a":1, "b":2, "book":3}
+print(f'dictionary data structure example \n {dict}')
+```
 
 ## Numpy array
 Numpy arrays are tensors. Rank of tensors == number of indices.
