@@ -77,3 +77,13 @@ indices =  np.indices((3,3))
 ```
 
 #### From special functions
+```Python
+# diagonal array
+diagonal = np.diag([1, 2, 3], k=0)
+# identity 
+identity = np.identity(3)
+# eye
+eye = np.eye(4, k=1)
+# rand
+rand = np.random.rand(3,2)
+```
