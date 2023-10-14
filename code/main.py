@@ -8,7 +8,12 @@ def main():
     # create_numpy_array_from_special_functions()
     # vectorizations_vs_python_loops()
     # arithmatic_operations()
-    trigonomic_functions()
+    # trigonomic_functions()
+    # rounding_functions()
+    # exponent_logarithm()
+    # miscellaneous_functions()
+    # indexing_and_slicing_one_dimension_array()
+    indexing_and_slicing_multi_dimension_array()
 
 if __name__ == "__main__":
     main()

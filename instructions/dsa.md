@@ -13,7 +13,12 @@
   - [Element-wise operations](#element-wise-operations)
     - [Arithmatic operations](#arithmatic-operations)
     - [Trigonomic functions](#trigonomic-functions)
+    - [Rounding functions](#rounding-functions)
+    - [Exponent and logarithm](#exponent-and-logarithm)
+    - [Miscellaneous functions](#miscellaneous-functions)
   - [Indexing and slicing](#indexing-and-slicing)
+    - [One dimension array](#one-dimension-array)
+    - [Multi-dimension array](#multi-dimension-array)
 
 ## Python collection types
 
@@ -224,5 +229,166 @@ def trigonomic_functions():
 ```
 ![Trigonomic plot](trigonometricplot.png)
 
-### Indexing and slicing
 
+#### Rounding functions
+```Python
+def rounding_functions():
+    decimals = np.linspace(0.11111111, 0.99999999, 10)
+
+    # rounding
+    around = np.around(decimals, 3)
+    # rounding
+    round = np.round(decimals, 3)
+    # rounding to integer
+    rint = np.rint(decimals)
+    # rounding integer towards zero
+    fix = np.fix(decimals)
+    # round to the floor
+    floor = np.floor(decimals)
+    # round to the ceiling
+    ceil = np.ceil(decimals)
+
+    print(f'around: {around}')
+    print(f'round: {round}')
+    print(f'rint: {rint}')
+    print(f'fix: {fix}')
+    print(f'floor: {floor}')
+    print(f'ceil: {ceil}')
+```
+
+
+#### Exponent and logarithm
+```Python
+def exponent_logarithm():
+    x = np.array([0.1, 1, np.e, np.pi])
+
+    # exponent
+    exp = np.exp(x)
+    # exponent(x) -1
+    expm1 = np.expm1(x)
+    # 2^P
+    exp2 = np.exp2(x)
+    # natural log
+    log = np.log(x)
+    # log base 10
+    log10 = np.log10(x)
+    # log base 2
+    log2 = np.log2(x)
+
+    print(f'exp: {exp}')
+    print(f'expm1: {expm1}')
+    print(f'exp2: {exp2}')
+    print(f'log: {log}')
+    print(f'log10: {log10}')
+    print(f'log2: {log2}')
+
+    plt.style.use('dark_background')
+    # %config InlineBackend.figure_format = 'retina' # to get high resolution images
+    fig, (plot1, plot2, plot3) = plt.subplots(3, 1)
+    plot1.plot(x, exp)
+    plot1.set_title("exp")
+    plot2.plot(x, log)
+    plot2.set_title("log")
+    plot3.plot(x, exp2)
+    plot3.set_title("exp2")
+    plt.tight_layout()
+    plt.show()
+```
+![Exponent_logarithm](exponent_logarithm.png)
+
+
+#### Miscellaneous functions
+```Python
+def miscellaneous_functions():
+    array_1 = np.arange(-9,9, 2)
+    array_2 = np.arange(-9,9, 2).reshape((3,3))
+
+    # sum over
+    sum_1, sum_2, sum_3 = np.sum(array_1), np.sum(array_2, axis=0), np.sum(array_2, axis=1) 
+    # take product
+    prod_1, prod_2, prod_3 = np.prod(array_1), np.prod(array_2, axis=0), np.prod(array_2, axis=1)
+    # cumulative sum
+    cumsum_1, cumsum_2, cumsum_3 = np.cumsum(array_1), np.cumsum(array_2, axis=0), np.cumsum(array_2, axis=1)
+    # clip values
+    clip_1, clip_2 = np.clip(array_1, 2, 8), np.clip(array_2, 2, 8)
+    # take absolute
+    absolute_1, absolute_2 = np.absolute(array_1), np.absolute(array_2) 
+    # take square root
+    sqrt_1, sqrt_2 = np.sqrt(np.absolute(array_1)), np.sqrt(np.absolute(array_2)) 
+    # take the square power
+    square_1, square_2 =  np.square(array_1), np.square(array_2)
+    # sign function
+    sign_1, sign_2 = np.sign(array_1), np.sign(array_2)
+    # n power
+    power = np.power(np.absolute(array_1), np.absolute(array_1))
+```
+
+### Indexing and slicing
+#### One dimension array
+```Python
+def indexing_and_slicing_one_dimension_array():
+    array_one = np.arange(1,11)
+    print(f'Array one: {array_one}')
+    print(f'Array one dimensions: {array_one.ndim}, shape:{array_one.shape}')
+    print(f'Select element at position [0]: {array_one[0]}')
+    print(f'Select element at position [5]: {array_one[5]}')
+    print(f'Select element at position [9]: {array_one[9]}')
+    print(f'Select element at position [-5]: {array_one[-5]}')
+    print(f'Select element at position [-1]: {array_one[-1]}')
+    # Slicing in one dimensional array
+    print(f'Elements from position [0] to position [3]: {array_one[0:3]}')
+    print(f'Elements from position [5] to position [9]: {array_one[5:9]}')
+    print(f'Elements from position [-9] to position [-5]: {array_one[-9:-5]}')
+    print(f'Elements from position [-3] to position [-1]: {array_one[-3:-1]}')
+    print(f'Elements from position [3] to position [-1]: {array_one[3:-1]}')
+    # slice with stride
+    print(f'Slice from position [0] to position [6] with stride [1]: {array_one[0:6:1]}')
+    print(f'Slice from position [0] to position [6] with stride [2]: {array_one[0:6:2]}')
+    print(f'Slice from position [-6] to position [-1] with stride [3]: {array_one[-6:-1:3]}')
+
+```
+![Indexing_and_slicing_one_dimension_array](indexing_and_slicing_one_dimension_array.png)
+
+#### Multi-dimension array
+There are two ways to index arrays with multiple dimensions:
+- referencing each dimension/axis within a single pair of square brackets with each dimension/axis separated by commas [,]: This creates a view of original with no additional memory 
+- referencing each dimension independently with as many square brackets as dimensions/axes [][]: It creates a new array with additional memory. Use it if you do not need original array and want to discard it.
+```Python
+def indexing_and_slicing_multi_dimension_array():
+    array_two = np.arange(1,10).reshape((3,3))
+    array_three = np.arange(1,9).reshape((2,2,2))
+    print(f'Array two dimensions/axes: \n{array_two}\n')
+    print(f'Array three dimensions/axes: \n{array_three}\n')
+    print(f'Array two dimensions: {array_two.ndim}, shape:{array_two.shape}')
+    print(f'Array three dimensions: {array_three.ndim}, shape:{array_three.shape}')
+    # indexing: method 1
+    print(f'Element at position 1 in first axis (rows) and position 1 in second axis (cols): {array_two[1,1]}')
+    print(f'Element at position 0 in first axis (rows) and position 2 in second axis (cols): {array_two[0,2]}')
+    print(f'Element at position -1 in first axis (rows) and position -3 in second axis (cols): {array_two[-1,-3]}')
+    # indexing method 2
+    print(f'Element at position 1 in first axis (rows) and position 1 in second axis (cols): {array_two[1][1]}')
+    print(f'Element at position 0 in first axis (rows) and position 2 in second axis (cols): {array_two[0][2]}')
+    print(f'Element at position -1 in first axis (rows) and position -3 in second axis (cols): {array_two[-1][-3]}')
+    # slicing
+    print(f'All elements at position 0 from first axis (all elements from first row): \n{array_two[0,:]}\n')
+    print(f'All elements at position 1 from first axis (all elements from second row): \n{array_two[1,:]}\n')
+    print(f'All elements at position 2 from first axis (all elements from third row): \n{array_two[2,:]}\n')
+    print(f'All elements at position 0 from second axis (all elements from first  column): \n{array_two[:,0]}\n')
+    print(f'All elements at position 1 from second axis (all elements from second column): \n{array_two[:,1]}\n')
+    print(f'All elements at position 2 from second axis (all elements from third  column): \n{array_two[:,2]}\n')
+    print(f'Elements at position 0 and 1 from first axis (rows) and position 0 from second axis (cols): \n{array_two[0:2,0]}\n')
+    print(f'Elements at position 0 and 1 from first axis (rows) and position 0 and 1 from second axis (cols): \n{array_two[0:2,0:2]}\n')
+    print(f'Elements at position 1 and 2 from first axis (rows) and position 1 and 2 from second axis (cols): \n{array_two[1:3,1:3]}\n')
+    # slice with stride
+    print(f'All elements at position 0 from first axis (all elements from first row) with stride 1: \n{array_two[0,::1]}\n')
+    print(f'All elements at position 0 from first axis (all elements from first row) with stride 2: \n{array_two[0,::2]}\n')
+    print(f'All elements at position 0 from second axis (all elements from first  column) with stride 1: \n{array_two[::1,0]}\n')
+    print(f'All elements at position 0 from second axis (all elements from first  column) with stride 2: \n{array_two[::2,0]}\n')
+    # three dimensional array
+    print(f'First two-dimensional array:\n{array_three[0]}\n')
+    print(f'Second two-dimensional array:\n{array_three[1]}\n')
+    print(f'Elements at position 0,0,2 of 3-D array : \n{array_three[0,0,1]}\n')
+    print(f'All elements at position 0 from first two-dimensional array (first row first array):\n{array_three[0][0,:]}\n')
+    print(f'All elements at position 1 from second two-dimensional array (second row second array):\n{array_three[1][1,:]}\n')
+```
+![indexing_and_slicing_multi_dimension_array](threed_array_indexing.png)
