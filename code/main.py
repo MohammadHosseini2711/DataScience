@@ -13,7 +13,9 @@ def main():
     # exponent_logarithm()
     # miscellaneous_functions()
     # indexing_and_slicing_one_dimension_array()
-    indexing_and_slicing_multi_dimension_array()
+    # indexing_and_slicing_multi_dimension_array()
+    # mask_indexing()
+    numpy_indexing_functions()
 
 if __name__ == "__main__":
     main()

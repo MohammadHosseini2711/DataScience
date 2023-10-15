@@ -331,3 +331,82 @@ def indexing_and_slicing_multi_dimension_array():
     print(f'Elements at position 0,0,2 of 3-D array : \n{array_three[0,0,1]}\n')
     print(f'All elements at position 0 from first two-dimensional array (first row first array):\n{array_three[0][0,:]}\n')
     print(f'All elements at position 1 from second two-dimensional array (second row second array):\n{array_three[1][1,:]}\n')
+
+
+def mask_indexing():
+    # 1D
+    array = np.arange(12) 
+    mask = array > 6
+
+    print(f'Array: \n{array}\n')
+    print(f'Mask or Boolean arrayw with "True" for values strictly grater than 6: \n{mask}\n')
+    print(f'Return an sub-array where "mask" elements are "True": \n{array[mask]}\n')
+
+    # twoD
+    array_two = np.arange(1,17).reshape((4,4))
+    mask_two =  array_two > 8
+
+    print(f'Two-dimensional array: \n{array_two}\n')
+    print(f'Mask or Boolean arrayw with "True" for values strictly greater than 8: \n{mask_two}\n')
+    print(f'Return an sub-array where "mask" elements are "True": \n{array_two[mask_two]}\n')
+    print(f'Shape new sub-array: {array_two[mask_two].shape}')
+
+
+def numpy_indexing_functions():
+    array = np.arange(12) 
+    array_two = np.arange(1,17).reshape((4,4))
+
+    # take
+    indices = [0, 2, -1]
+    print(f'array is: {array}')
+    print(f'Take elements at positions 0, 2 and -1 from one-dim array:\n{np.take(array, indices)}\n')
+    print(f'array 2D is :\n {array_two}')
+    print(f'Take elements at positions 0, 2 and -1 from one-dim array along the first (row) axis:\n{np.take(array_two, indices, axis=0)}\n')
+    print(f'Take elements at positions 0, 2 and -1 from one-dim array along the second (col) axis:\n{np.take(array_two, indices, axis=1)}\n')
+
+    # choose
+    choices_one = [3, 1, 2, 0]
+    choices_diagonal = [0, 1, 2, 3]
+    choices_diagonal_back = [3, 2, 1, 0]
+
+
+    print(f'Two-dimensional array:\n{array_two}\n')
+    print(f'Choose the 1st element from the 4th array, the 2nd from the 1st, the 3th from the 2nd, and the 4th from the 1st: \n{np.choose(choices_one, array_two)}\n')
+    print(f'Choose diagonal elements from top-left to botton-right: \n{np.choose(choices_diagonal, array_two)}\n')
+    print(f'Choose diagonal elements from bottom-left to top-right: \n{np.choose(choices_diagonal_back, array_two)}\n')
+
+    # diagonal
+    print(f'Two-dimensional array:\n{array_two}\n')
+    print(f'Extract 1st-diagonal diagonal elements from top-left to bottom-right: \n{np.diagonal(array_two, offset=0)}\n')
+    print(f'Extract 2st-diagonal diagonal elements from top-left to bottom-right: \n{np.diagonal(array_two, offset=1)}\n')
+    print(f'Extract 3st-diagonal diagonal elements from top-left to bottom-right: \n{np.diagonal(array_two, offset=2)}\n')
+
+    # diagonals in the opposite direction
+    print(f'Two-dimensional array\n{array_two}\n')
+    print(f'Vertical flip: \n{np.flipud(array_two)}\n')
+    print(f'Horizontal flip: \n{np.fliplr(array_two)}\n')
+    print(f'Vertical and horizontal flip: \n{np.fliplr(np.flipud(array_two))}\n')
+    print(f'Extract 1st-diagonal diagonal from bottom-right to top-left: \n{np.diagonal(np.fliplr(np.flipud(array_two)), offset=0)}\n')
+    print(f'Extract 2st-diagonal diagonal from bottom-right to top-left: \n{np.diagonal(np.fliplr(np.flipud(array_two)), offset=1)}\n')
+    print(f'Extract 3st-diagonal diagonal from bottom-right to top-left: \n{np.diagonal(np.fliplr(np.flipud(array_two)), offset=2)}\n')
+
+    # To obtain the opposite diagonal or “anti-diagonal” from the top-right to the bottom-left (and its reverse)
+    print(f'Two-dimensional array: \n{array_two}\n')
+    print(f'Antidiagonal: \n{np.diagonal(np.fliplr(array_two), offset=0)}\n')
+    print(f'Antidiagonal from bottom-left to top-right: \n{np.diagonal(np.flipud(array_two), offset=0)}\n')
+
+    # select
+    x = np.arange(10)
+    y = np.arange(1,11)
+
+    condlist = [x<3, x>5]
+    choicelist = [x, y]
+
+    print(f'Select elements from x where x<3, and elements from y where x>5: \n{np.select(condlist, choicelist)}\n')
+    print(f'Select elements from x where x<3, and elements from y where x>5, with default value 99 for False: \n{np.select(condlist, choicelist, default=99)}\n')
+
+    non_zero = np.select(condlist, choicelist)
+    non_nine = np.select(condlist, choicelist, default=99)
+
+    print(f'Select non-zero value: \n{non_zero[non_zero != 0]}\n')
+    print(f'Select non-ninety-nine values (This option prevents you to remove zeros when zero is a valid value):\n{non_nine[non_nine != 99]}')
