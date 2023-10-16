@@ -21,7 +21,10 @@
     - [Multi-dimension array](#multi-dimension-array)
     - [Mask indexing](#mask-indexing)
     - [Numpy indexing function](#numpy-indexing-function)
-  - [](#)
+  - [Array iteration](#array-iteration)
+  - [Copying numpy array](#copying-numpy-array)
+    - [Shallow copy](#shallow-copy)
+    - [Deep copying](#deep-copying)
 
 ## Python collection types
 
@@ -481,4 +484,91 @@ def numpy_indexing_functions():
     print(f'Select non-ninety-nine values (This option prevents you to remove zeros when zero is a valid value):\n{non_nine[non_nine != 99]}')
 ```
 
-###
+### Array iteration
+```Python
+def array_iteration():
+    array = np.arange(1,10).reshape(3,3)
+    # nditer iterate the elements in the order they are stored in the memory. nditer is readonly by default
+    print(f"Two-dimensional array:\n{array}\n")
+    for element in np.nditer(array):
+        print(element, end=' ')
+    print(f'\n')
+    print(f"Transposed (along main diagonal) two-dimensional array:\n{array.T}\n")
+    for element in np.nditer(array.T):
+        print(element, end=' ') # the same as the original
+
+    # mutable iteration
+    array_to_update = np.arange(1,10).reshape(3,3)
+    print(f'Array to update:\n{array_to_update}\n')
+    with np.nditer(array_to_update, op_flags=['readwrite']) as iterator:
+        for element in iterator:
+            element[...] = element**2
+            
+    print(f'Updated array (squared):\n{array_to_update}')
+    print(f'\n')
+    # external loop flag makes iteration faster
+    large_array = np.arange(10000)
+    for element in np.nditer(large_array, flags=['external_loop'], op_flags=['readwrite']):
+        element[...] = element*2
+
+    print(f'updated array doubled:\n{large_array}')
+
+    # Inumeration with index
+    array = np.arange(1,10).reshape(3,3)
+    for index, element in np.ndenumerate(array):
+        print(f'Pair of indices: {index}, Element: {element}')
+```
+
+### Copying numpy array
+#### Shallow copy 
+Memory is shared
+```Python
+def shallow_copy_numpy_array():
+
+    # Shallow copying
+    array_one = np.ones(10)
+    array_two = array_one
+
+    print(f'Array one:{array_one}\n')
+    print(f'Array two:{array_two}\n')
+    print(f'Are array-one and array-two the same object?: {array_two is array_one}\n')
+    print(f'Do array-one and array-two share memory?: {np.may_share_memory(array_one, array_two)}')
+    array_two[-1] = 99
+    print(f'New array-two:\n{array_two}\n')
+
+    print(f'Array-one is changed although no explicit operation was done to it:\n{array_one}')
+
+    array_three = array_one[0:6]
+
+    print(f'Array one:{array_one}\n')
+    print(f'Array three:{array_three}\n')
+    print(f'Are array-one and array-three the same object?: {array_two is array_three}\n')
+    print(f'Do array-one and array-three share memory?: {np.may_share_memory(array_one, array_three)}')
+
+    array_three_reshape = array_three.reshape(2,3)
+
+    print(f'Array-three change shape:\n{array_three_reshape}\n')
+    print(f'But this does not change array-two (the source):\n{array_two}')
+
+    array_three[0] = 99
+
+    print(f'Array-three new value at position 0:\n{array_three}\n')
+    print(f'This does change array-two (the source):\n{array_two}')
+``` 
+#### Deep copying
+Memory is not shared!
+```Python
+def deep_copy_numpy_array():
+    array_one = np.ones(10)
+    array_four = array_one[0:5].copy()
+
+    print(f'Array one:{array_one}\n')
+    print(f'Array four:{array_four}\n')
+    print(f'Are array-one and array-four the same object?: {array_one is array_four}\n')
+    print(f'Do array-one and array-four share memory?: {np.may_share_memory(array_one, array_four)}')
+
+    array_four[3] = 99
+
+    print(f'Array-four new value at position 3:\n{array_four}\n')
+    print(f'This does NOT change array-one (the source):\n{array_one}')
+```
