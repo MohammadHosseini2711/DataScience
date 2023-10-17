@@ -24,7 +24,8 @@
   - [Array iteration](#array-iteration)
   - [Copying numpy array](#copying-numpy-array)
     - [Shallow copy](#shallow-copy)
-    - [Deep copying](#deep-copying)
+    - [Deep copy](#deep-copy)
+  - [Array manipulation](#array-manipulation)
 
 ## Python collection types
 
@@ -405,7 +406,7 @@ def mask_indexing():
     # 1D
     array = np.arange(12) 
     mask = array > 6
-
+    # Mask indexing creates a new array (new memory = deep copy)
     print(f'Array: \n{array}\n')
     print(f'Mask or Boolean arrayw with "True" for values strictly grater than 6: \n{mask}\n')
     print(f'Return an sub-array where "mask" elements are "True": \n{array[mask]}\n')
@@ -555,7 +556,7 @@ def shallow_copy_numpy_array():
     print(f'Array-three new value at position 0:\n{array_three}\n')
     print(f'This does change array-two (the source):\n{array_two}')
 ``` 
-#### Deep copying
+#### Deep copy
 Memory is not shared!
 ```Python
 def deep_copy_numpy_array():
@@ -571,4 +572,85 @@ def deep_copy_numpy_array():
 
     print(f'Array-four new value at position 3:\n{array_four}\n')
     print(f'This does NOT change array-one (the source):\n{array_one}')
+```
+
+### Array manipulation
+```Python
+def array_manipulation():
+    # Shape manipulation
+    array_1 = np.array([[1, 2, 3], [4, 5, 6]])
+
+    print(f'Array-1 shape: {array_1.shape}')
+
+    array_2 = array_1.reshape(3,2) 
+    array_3 = np.reshape(array_1, (1,6))
+    print(f'Array-2:\n{array_2},\nshape: {array_2.shape}\n')
+    print(f'Array-3:\n{array_3},\nshape: {array_3.shape}')
+
+    array_1_ravel = array_1.ravel()
+    array_1_flatt = array_1.flatten()
+    print(f'Array-1 ravel:\n{array_1_ravel},\nshape: {array_1_ravel.shape}\n')
+    print(f'Array-1 flattened:\n{array_1_flatt},\nshape: {array_1_flatt.shape}')
+
+    # add dimension to array
+    a = np.array([1, 2, 3])
+
+    print(f'Array a: {a}\n')
+    print(f'Array a shape: {a.shape}\n')
+    print(f'Array a dimensions: {a.ndim}\n')
+
+    a_row = a[np.newaxis, :]
+
+    print(f'Array a: {a_row}\n')
+    print(f'Array a shape: {a_row.shape}\n')
+    print(f'Array a dimensions: {a_row.ndim}\n')
+
+    a_col = a[:, np.newaxis]
+
+    print(f'Array a:\n{a_col}\n')
+    print(f'Array a shape: {a_col.shape}\n')
+    print(f'Array a dimensions: {a_col.ndim}\n')
+
+    # Transpose operation
+    array_1 = np.arange(4).reshape((2,2))# two dimensional array
+    array_2 = np.arange(12).reshape((3,2,2)) # three dimensional array
+    print(f'Array-1:\n{array_1},\nshape:{array_1.shape}\n')
+    print(f'Array-2:\n{array_2},\nshape:{array_2.shape}')
+    
+    array_1_T = array_1.T
+    array_2_T = array_2.T
+    print(f'Array-1 transposed:\n{array_1_T},\nshape:{array_1_T.shape}\n')
+    print(f'Array-2 transposed:\n{array_2_T},\nshape:{array_2_T.shape}')
+
+    # move axis
+    array_move_2_3_4 = np.arange(24).reshape((2,3,4))
+    array_move_2_4_3 = np.moveaxis(array_move_2_3_4, 2, 1) # move axis in position two to position one
+    array_move_3_2_4 = np.moveaxis(array_move_2_3_4, 0, 1) # move axis in position zero to position one
+    array_move_3_4_2 = np.moveaxis(array_move_2_3_4, 0, 2) # move axist in the zero position to position two
+    array_move_4_2_3 = np.moveaxis(array_move_2_3_4, [2, 1], [0, 2]) # move axes in positions two and one, to positions zero and two
+    array_move_4_3_2 = np.moveaxis(array_move_2_3_4, [2, 0], [0, 2]) # move axes in positions two and zero, to positions zero and two
+    print(f'Original order: {array_move_2_3_4.shape}\n')
+    print(f'New axes order 1: {array_move_2_4_3.shape}\n')
+    print(f'New axes order 2: {array_move_3_2_4.shape}\n')
+    print(f'New axes order 3: {array_move_3_4_2.shape}\n')
+    print(f'New axes order 4: {array_move_4_2_3.shape}\n')
+    print(f'New axes order 5: {array_move_4_3_2.shape}')
+
+    # Dimension manipulation
+    array_one = np.array([1, 2, 3])
+    array_two = np.array([[1, 2, 3], [4, 5, 6]])
+    array_one_expand =  np.expand_dims(array_one, axis=0)
+    array_two_expand =  np.expand_dims(array_two, axis=0)
+    print(f'One dimensional array: \n{array_one} \nshape: {array_one.shape}\n')
+    print(f'One dimensional array expanded: \n{array_one_expand} \nshape: {array_one_expand.shape}\n')
+    print(f'Two dimensional array: \n{array_two} \nshape: {array_two.shape}\n')
+    print(f'Two dimensional array expanded: \n{array_two_expand} \nshape: {array_two_expand.shape}\n')
+
+    array_one_squeez =  np.squeeze(array_one_expand, axis=0)
+    array_two_squeez =  np.squeeze(array_two_expand, axis=0)
+    print(f'Three dimensional array squeezed: \n{array_one_squeez} \nshape: {array_one_squeez.shape}\n')
+    print(f'Three dimensional array squeezed: \n{array_two_squeez} \nshape: {array_two_squeez.shape}')
+
+    print(f'Are dimensions for array-one and array-one-squeezed equal?: {array_one.shape == array_one_squeez.shape}\n')
+    print(f'Are dimensions for array-two and array-two-squeezed equal?: {array_two.shape == array_two_squeez.shape}')
 ```

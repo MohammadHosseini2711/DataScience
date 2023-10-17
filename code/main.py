@@ -14,11 +14,12 @@ def main():
     # miscellaneous_functions()
     # indexing_and_slicing_one_dimension_array()
     # indexing_and_slicing_multi_dimension_array()
-    # mask_indexing()
+    #  mask_indexing()
     # numpy_indexing_functions()
     # array_iteration()
     # shallow_copy_numpy_array()
-    deep_copy_numpy_array()
+    # deep_copy_numpy_array()
+    array_manipulation()
 
 if __name__ == "__main__":
     main()
