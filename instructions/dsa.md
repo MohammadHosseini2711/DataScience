@@ -26,6 +26,8 @@
     - [Shallow copy](#shallow-copy)
     - [Deep copy](#deep-copy)
   - [Array manipulation](#array-manipulation)
+- [Statistics](#statistics)
+    - [Random numbers](#random-numbers)
 
 ## Python collection types
 
@@ -653,4 +655,56 @@ def array_manipulation():
 
     print(f'Are dimensions for array-one and array-one-squeezed equal?: {array_one.shape == array_one_squeez.shape}\n')
     print(f'Are dimensions for array-two and array-two-squeezed equal?: {array_two.shape == array_two_squeez.shape}')
+```
+
+## Statistics
+#### Random numbers
+```Python
+from numpy import random
+import matplotlib.pylab as plt
+def binomial_distribution():
+    # plot
+    from numpy.random import default_rng
+    rg = default_rng() 
+    plt.style.use('dark_background')
+    # %config InlineBackend.figure_format = 'retina' # to get high resolution images
+
+    n, p1, p2, t = 1, .5, .8, 1000
+    binomial_fair = rg.binomial(n, p1, t)
+    binomial_bias = rg.binomial(n, p2, t)
+    fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True)
+    fig.suptitle('Sampling from binomial distribution')
+    ax1.hist(binomial_fair)
+    ax1.set_title("50/50 chance")
+    ax2.hist(binomial_bias)
+    ax2.set_title("20/80 chance")
+    plt.show()
+
+
+def chi_square_distribution():
+    from numpy.random import default_rng
+    rg = default_rng()
+    chisquare1 = rg.chisquare(5,1000)
+    chisquare2 = rg.chisquare(50,1000)
+    fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True)
+    fig.suptitle('Sampling from chisquare distribution')
+    ax1.hist(chisquare1, bins=50)
+    ax1.set_title("5 degrees of freedom")
+    ax2.hist(chisquare2, bins=50)
+    ax2.set_title("50 degrees of freedom")
+    plt.show()
+
+
+def poisson_distribution():
+    from numpy.random import default_rng
+    rg = default_rng()
+    poisson1 = rg.poisson(5, 1000)
+    poisson2 = rg.poisson(50, 1000)
+    fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True)
+    fig.suptitle('Sampling from poisson distribution')
+    ax1.hist(poisson1, bins=10)
+    ax1.set_title("Expectation of interval: 5")
+    ax2.hist(poisson2, bins=10)
+    ax2.set_title("Expectation of interval: 50")
+    plt.show()
 ```

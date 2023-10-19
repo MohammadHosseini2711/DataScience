@@ -573,3 +573,109 @@ def array_manipulation():
 
     print(f'Are dimensions for array-one and array-one-squeezed equal?: {array_one.shape == array_one_squeez.shape}\n')
     print(f'Are dimensions for array-two and array-two-squeezed equal?: {array_two.shape == array_two_squeez.shape}')
+
+
+from numpy import random
+
+def random_numbers():
+    
+    from numpy.random import default_rng
+    rng = default_rng()
+    random_numbers = rng.standard_normal(5)
+    print(f'Random numbers sequence sampled from a normal distributon:\n{random_numbers}')
+
+    print(f'A random integer between [1, 10) (10 non-inclusive): \n{rng.integers(10)}\n')
+    print(f'5 random integers between [1, 10) (10 non-inclusive): \n{rng.integers(10, size=5)}\n\n')
+
+    print(f'A random float between [0.0, 1.0) (1.0 non-inclusive): \n{rng.random()}\n')
+    print(f'3 random floats between [0.0, 1.0) (1.0 non-inclusive): \n{rng.random((3,))}\n')
+    print(f'3,3 random floats between [0.0, 1.0) (1.0 non-inclusive): \n{rng.random((3,3))}\n')
+    print(f'3,3,3 random floats between [0.0, 1.0) (1.0 non-inclusive): \n{rng.random((3,3,3))}\n')
+
+
+    # choice
+
+    print(f'A random number from an array [1, 10] (inclusive): \n{rng.choice(np.arange(10))}\n')
+    print(f'5 random numbers from an array [1, 10] (inclusive): \n{rng.choice(np.arange(10), 5)}\n\n')
+
+    print("The 'p=' argument indicates the weight for each element of the sample space")
+    print(f'A non-uniform sample of random numbers from an array [1, 10] (inclusive): \n{rng.choice(np.arange(10), 5, p=[0.1, 0, 0, 0.1, 0, 0.1, 0.2, 0, 0, 0.5])}\n\n')
+
+    print("The previous examples were sampling with replacement. We can sample without replacement as well:")
+    print(f'Uniform sample of random numbers from an array [1, 10] (inclusive): \n{rng.choice(np.arange(10), 5, replace=False)}\n\n')
+
+    # seeded random
+    rg = default_rng(seed=9320) 
+
+    print(f'{rg.integers(5, size=5)}')
+    print(f'{rg.integers(5, size=5)}')
+    print(f'{rg.integers(5, size=5)}')
+
+    rg = default_rng(seed=9320) 
+
+    print("Numbers are the same as in the example above:")
+    print(f'{rg.integers(5, size=5)}')
+    print(f'{rg.integers(5, size=5)}')
+    print(f'{rg.integers(5, size=5)}')
+
+    rg = default_rng() 
+
+    print("This time numbers will change at random:")
+    print(f'{rg.integers(5, size=5)}')
+    print(f'{rg.integers(5, size=5)}')
+    print(f'{rg.integers(5, size=5)}')
+
+    rg = default_rng() 
+
+    print(f'{rg.integers(5, size=5)}')
+    print(f'{rg.integers(5, size=5)}')
+    print(f'{rg.integers(5, size=5)}')
+
+
+from numpy import random
+import matplotlib.pylab as plt
+def binomial_distribution():
+    # plot
+    from numpy.random import default_rng
+    rg = default_rng() 
+    plt.style.use('dark_background')
+    # %config InlineBackend.figure_format = 'retina' # to get high resolution images
+
+    n, p1, p2, t = 1, .5, .8, 1000
+    binomial_fair = rg.binomial(n, p1, t)
+    binomial_bias = rg.binomial(n, p2, t)
+    fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True)
+    fig.suptitle('Sampling from binomial distribution')
+    ax1.hist(binomial_fair)
+    ax1.set_title("50/50 chance")
+    ax2.hist(binomial_bias)
+    ax2.set_title("20/80 chance")
+    plt.show()
+
+
+def chi_square_distribution():
+    from numpy.random import default_rng
+    rg = default_rng()
+    chisquare1 = rg.chisquare(5,1000)
+    chisquare2 = rg.chisquare(50,1000)
+    fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True)
+    fig.suptitle('Sampling from chisquare distribution')
+    ax1.hist(chisquare1, bins=50)
+    ax1.set_title("5 degrees of freedom")
+    ax2.hist(chisquare2, bins=50)
+    ax2.set_title("50 degrees of freedom")
+    plt.show()
+
+
+def poisson_distribution():
+    from numpy.random import default_rng
+    rg = default_rng()
+    poisson1 = rg.poisson(5, 1000)
+    poisson2 = rg.poisson(50, 1000)
+    fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True)
+    fig.suptitle('Sampling from poisson distribution')
+    ax1.hist(poisson1, bins=10)
+    ax1.set_title("Expectation of interval: 5")
+    ax2.hist(poisson2, bins=10)
+    ax2.set_title("Expectation of interval: 50")
+    plt.show()

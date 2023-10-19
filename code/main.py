@@ -19,7 +19,11 @@ def main():
     # array_iteration()
     # shallow_copy_numpy_array()
     # deep_copy_numpy_array()
-    array_manipulation()
+    # array_manipulation()
+    # random_numbers()
+    # binomial_distribution()
+    # chi_square_distribution()
+    poisson_distribution()
 
 if __name__ == "__main__":
     main()
