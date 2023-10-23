@@ -28,6 +28,8 @@
   - [Array manipulation](#array-manipulation)
 - [Statistics](#statistics)
     - [Random numbers](#random-numbers)
+- [Optimization](#optimization)
+  - [Linear programming](#linear-programming)
 
 ## Python collection types
 
@@ -708,3 +710,8 @@ def poisson_distribution():
     ax2.set_title("Expectation of interval: 50")
     plt.show()
 ```
+
+## Optimization
+### Linear programming
+Maximize or minimize a linear objective function subject to linear constraints. 
+![Linear programming](linear_problem.jpg)

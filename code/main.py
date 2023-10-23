@@ -1,4 +1,6 @@
 from dsa.ds1 import*
+from lp import*
+
 def main():
     # introduce_python_collections()
     # introduce_numpy_array()
@@ -23,7 +25,11 @@ def main():
     # random_numbers()
     # binomial_distribution()
     # chi_square_distribution()
-    poisson_distribution()
+    # poisson_distribution()
+
+    # Linear programming functions (optimization)
+    linear_programming_farmer()
+    linear_programming_farmer2()
 
 if __name__ == "__main__":
     main()
