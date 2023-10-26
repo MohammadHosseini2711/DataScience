@@ -30,6 +30,8 @@
     - [Random numbers](#random-numbers)
 - [Optimization](#optimization)
   - [Linear programming](#linear-programming)
+    - [Farmer's example](#farmers-example)
+    - [Factory example](#factory-example)
 
 ## Python collection types
 
@@ -715,3 +717,52 @@ def poisson_distribution():
 ### Linear programming
 Maximize or minimize a linear objective function subject to linear constraints. 
 ![Linear programming](linear_problem.jpg)
+
+#### Farmer's example
+```Python
+from scipy.optimize import linprog
+def linear_programming_farmer():
+    # problem formulation
+    obj = [-1.2, -1.7]
+    lhs_eq = [[1, 1]]
+    rhs_eq = [5000]
+    lhs_ieq = [[1, 0], [0, 1]]
+    rhs_ieq = [3000, 4000]
+    bounds = [(0, None), (0, None)]
+
+    # solve
+    res = linprog(c=obj, A_eq=lhs_eq, b_eq=rhs_eq, A_ub=lhs_ieq, b_ub=rhs_ieq, bounds=bounds, method='simplex')
+
+    # print results
+    print("potatoes:", res.x[0])
+    print("carrots:", res.x[1])
+    print("profit:", -res.fun)
+```
+#### Factory example
+A factory produces four different products, and that the daily produced amount of the first product is  x1, the amount produced of the second product is x2, and so on. The goal is to determine the profit-maximizing daily production amount for each product, with the following constraints:
+1. The profit per unit of product is 20, 12, 30, and 15 for the first, second, third, and fourth product, respectively.
+2. Due to manpower constraints, the total number of units produced per day can’t exceed fifty (50).
+3. For each unit of the first product, three units of the raw material A are consumed. Each unit of the second product requires two units of the raw material A and one unit of the raw material B. Each unit of the third product needs two unit of A and five units of B. Finally, each unit of the fourth product requires three units of B.
+4. Due to the transportation and storage constraints, the factory can consume up to one hundred units of the raw material A and ninety units of B per day.
+   
+![Factory example](linear_problem_factory.jpg)
+```Python
+from scipy.optimize import linprog
+def linear_programming_factory():
+    # Coefficients of objective function are negative, because the problem is maximization.
+    obj = [-20, -12, -30, -15] 
+    # LHS matrix of inequality equations
+    lhs = [[1, 1, 1, 1],
+    [3, 2, 2, 0],
+    [0, 1, 5, 3]]
+    # RHS matrix of inequality equations
+    rhs = [50,
+        100,
+        90]
+    lp_opt = linprog(c=obj,
+                 A_ub=lhs,
+                 b_ub=rhs,
+                 method = 'interior-point')
+    
+    print(lp_opt)
+```

@@ -41,3 +41,53 @@ def linear_programming_farmer2():
     print("potatoes:", x_p.value())
     print("carrots:", x_c.value())
     print("profit:", value(model.objective))
+
+
+from scipy.optimize import linprog
+def linear_programming_factory():
+    # Coefficients of objective function are negative, because the problem is maximization.
+    obj = [-20, -12, -30, -15] 
+    # LHS matrix of inequality equations
+    lhs = [[1, 1, 1, 1],
+    [3, 2, 2, 0],
+    [0, 1, 5, 3]]
+    # RHS matrix of inequality equations
+    rhs = [50,
+        100,
+        90]
+    lp_opt = linprog(c=obj,
+                 A_ub=lhs,
+                 b_ub=rhs,
+                 method = 'interior-point')
+    
+    print(lp_opt)
+
+
+
+from pulp import *     #https://github.com/coin-or/pulp
+def linear_programming_factory2():
+  
+    # problem formulation
+    model = LpProblem(sense=LpMaximize)
+
+    x_1 = LpVariable(name="product1", lowBound=0)
+    x_2 = LpVariable(name="product2", lowBound=0)
+    x_3 = LpVariable(name="product3", lowBound=0)
+    x_4 = LpVariable(name="product4", lowBound=0)
+
+
+    # constaints
+    model += x_1 + x_2 + x_3 + x_4 <= 50  
+    model += 3*x_1 + 2*x_2 + 2*x_3 <= 100
+    model += x_2 + 5*x_3 + 3*x_4 <= 90
+
+    #objective function
+    model += 20*x_1 + 12*x_2 + 30*x_3 + 15*x_4
+
+    # solve (without being verbose)
+    status = model.solve(PULP_CBC_CMD(msg=False))
+    print("product1:", x_1.value())
+    print("product2:", x_2.value())
+    print("product3:", x_3.value())
+    print("product4:", x_4.value())
+    print("profit:", value(model.objective))

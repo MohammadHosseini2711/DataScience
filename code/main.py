@@ -28,8 +28,11 @@ def main():
     # poisson_distribution()
 
     # Linear programming functions (optimization)
-    linear_programming_farmer()
-    linear_programming_farmer2()
+    # linear_programming_farmer()
+    # linear_programming_farmer2()
+    linear_programming_factory()
+    linear_programming_factory2()
+
 
 if __name__ == "__main__":
     main()
