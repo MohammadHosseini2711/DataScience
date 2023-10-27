@@ -32,6 +32,7 @@
   - [Linear programming](#linear-programming)
     - [Farmer's example](#farmers-example)
     - [Factory example](#factory-example)
+    - [Company example 2](#company-example-2)
 
 ## Python collection types
 
@@ -714,9 +715,13 @@ def poisson_distribution():
 ```
 
 ## Optimization
+![optimization](op_types.png)
+![convex-nonconvex1](convex-nonconvex1.png)
+![convex-nonconvex2](convex-nonconvex2.png)
 ### Linear programming
 Maximize or minimize a linear objective function subject to linear constraints. 
 ![Linear programming](linear_problem.jpg)
+
 
 #### Farmer's example
 ```Python
@@ -765,4 +770,35 @@ def linear_programming_factory():
                  method = 'interior-point')
     
     print(lp_opt)
+```
+
+#### Company example 2
+A company manufactures two products: X and Y. To manufacture each product, it has to go through three machines: A, B, and C. Manufacturing X require 3 hours in machine A, 9 hours in machine B, and 2 hours in machine C. Similarly, manufacturing product Y require 2, 4, and 10 hours in machines A, B, and C respectively. The availability of each of the machines A, B, and C during a manufacturing period are 66, 180, and 200 hours respectively. The profit per product X is USD 90 and that per product Y is USD 75. How many units of X and Y should be produced during a production period to maximize profit?
+```
+Profit = 90x+75y
+Objective: maximize 90x+75y subject to:
+3x+2y≤66
+9x+4y≤180
+2x+10y≤200
+x, y≥0
+```
+```Python
+from scipy.optimize import linprog
+def manufacturing_profit_scipy():
+    # problem formulation
+    # objective function: varaibles -> x,y
+    obj = [-90, -75]   # scipy only do minimization, so we negate the coefficient of the objective 
+    bounds = [(0, None), (0, None)]  # the bound of variables
+    # constraint equations
+    lhs_ieq = [[3, 2], [9, 4], [2, 10]]  # left handside inequality coefficient: constraint equations
+    rhs_ieq = [66, 180, 200]             # right handside inequality coefficient: constraint equations
+    
+
+    # solve
+    res = linprog(c=obj, A_ub=lhs_ieq, b_ub=rhs_ieq, bounds=bounds, method='simplex')
+
+    # print results
+    print("Product1:", res.x[0])
+    print("Product2:", res.x[1])
+    print("Profit:", -res.fun)
 ```

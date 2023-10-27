@@ -30,8 +30,9 @@ def main():
     # Linear programming functions (optimization)
     # linear_programming_farmer()
     # linear_programming_farmer2()
-    linear_programming_factory()
-    linear_programming_factory2()
+    # linear_programming_factory()
+    # linear_programming_factory2()
+    manufacturing_profit_scipy()
 
 
 if __name__ == "__main__":

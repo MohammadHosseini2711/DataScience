@@ -1,7 +1,7 @@
 # Linear programming examples
 
 from scipy.optimize import linprog
-def linear_programming_farmer():
+def linear_programming_farmer_scipy():
     # problem formulation
     obj = [-1.2, -1.7]
     lhs_eq = [[1, 1]]
@@ -20,7 +20,7 @@ def linear_programming_farmer():
 
 
 from pulp import *     #https://github.com/coin-or/pulp
-def linear_programming_farmer2():
+def linear_programming_farmer_pulp():
         
     # problem formulation
     model = LpProblem(sense=LpMaximize)
@@ -44,7 +44,7 @@ def linear_programming_farmer2():
 
 
 from scipy.optimize import linprog
-def linear_programming_factory():
+def linear_programming_factory_scipy():
     # Coefficients of objective function are negative, because the problem is maximization.
     obj = [-20, -12, -30, -15] 
     # LHS matrix of inequality equations
@@ -65,7 +65,7 @@ def linear_programming_factory():
 
 
 from pulp import *     #https://github.com/coin-or/pulp
-def linear_programming_factory2():
+def linear_programming_factory_pulp():
   
     # problem formulation
     model = LpProblem(sense=LpMaximize)
@@ -91,3 +91,24 @@ def linear_programming_factory2():
     print("product3:", x_3.value())
     print("product4:", x_4.value())
     print("profit:", value(model.objective))
+
+
+from scipy.optimize import linprog
+def manufacturing_profit_scipy():
+    # problem formulation
+    # objective function: varaibles -> x,y
+    obj = [-90, -75]   # scipy only do minimization, so we negate the coefficient of the objective 
+    bounds = [(0, None), (0, None)]  # the bound of variables
+    # constraint equations
+    lhs_ieq = [[3, 2], [9, 4], [2, 10]]  # left handside inequality coefficient: constraint equations
+    rhs_ieq = [66, 180, 200]             # right handside inequality coefficient: constraint equations
+    
+
+    # solve
+    res = linprog(c=obj, A_ub=lhs_ieq, b_ub=rhs_ieq, bounds=bounds, method='simplex')
+
+    # print results
+    print("Product1:", res.x[0])
+    print("Product2:", res.x[1])
+    print("Profit:", -res.fun)
+
