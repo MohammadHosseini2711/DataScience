@@ -715,12 +715,20 @@ def poisson_distribution():
 ```
 
 ## Optimization
+If an objective function maps from X (domain of the function) to Y (range of the function) the goal of optimization is to find member of X for which Y is maximum or minimum.
+Components of an optimization problem are:
+1. Decision variables or input dimensions.
+2. Objective function. The function to be optimized or the output dimension.
+3. Constraint functions. These functions (if any) constraint our search space.
 ![optimization](op_types.png)
 ![convex-nonconvex1](convex-nonconvex1.png)
 ![convex-nonconvex2](convex-nonconvex2.png)
 ### Linear programming
 Maximize or minimize a linear objective function subject to linear constraints. 
 ![Linear programming](linear_problem.jpg)
+
+For an interactive example see [here](https://www.geogebra.org/m/XJzvHxCB)
+![Linear programming](OptimizationsExample.jpg)
 
 
 #### Farmer's example
