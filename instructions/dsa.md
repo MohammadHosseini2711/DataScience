@@ -33,6 +33,7 @@
     - [Farmer's example](#farmers-example)
     - [Factory example](#factory-example)
     - [Company example 2](#company-example-2)
+- [Machine learning](#machine-learning)
 
 ## Python collection types
 
@@ -720,8 +721,21 @@ Components of an optimization problem are:
 1. Decision variables or input dimensions.
 2. Objective function. The function to be optimized or the output dimension.
 3. Constraint functions. These functions (if any) constraint our search space.
+
+Algorithms for different types of optimization problems are different. How optimization problems are different?
+1. Constraint vs unconstraint optimization. is there any constraint on search space?
+2. Convex vs non-convex optimization. if there is constraints on search space, is seach space convex or non-convex? ![convex-nonconvex1](convex-nonconvex1.png)
+3. linear vs non-linear optimization. is objective function linear or non-linear with respect to variables? Are constraint functions linear or non-linear?
+
+Convex optimization problems:
+1. Cone programming: constraints are conic. ![Cone programming](coneprogramming.png)
+2. Semi-definite programming: objective function is linear. ![Semi-definite programming](Semi-definiteprogramming.png)
+3. Quadratically Constrained Quadratic Programming (QCQP): both constraints and objective are quadratic.
+4. Linearly Constraint Quadratic Programming: constraints are linear, objective function is quadratic.
+5. linear programming: both objective functions and constraints are linear functions of variables.
+
+![hierarchy](convexproblemhierarchy.png)
 ![optimization](op_types.png)
-![convex-nonconvex1](convex-nonconvex1.png)
 ![convex-nonconvex2](convex-nonconvex2.png)
 ### Linear programming
 Maximize or minimize a linear objective function subject to linear constraints. 
@@ -810,3 +824,5 @@ def manufacturing_profit_scipy():
     print("Product2:", res.x[1])
     print("Profit:", -res.fun)
 ```
+
+## Machine learning
