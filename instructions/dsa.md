@@ -34,6 +34,7 @@
     - [Factory example](#factory-example)
     - [Company example 2](#company-example-2)
 - [Machine learning](#machine-learning)
+  - [Generalized linear models](#generalized-linear-models)
 
 ## Python collection types
 
@@ -664,6 +665,17 @@ def array_manipulation():
 ```
 
 ## Statistics
+- We have a set(discrete or continuous, finite or infinite) called outcomes. we have a set which is a subset of outcomes called event(one event is a subset of outcome set).
+- if outcome set is discrete(example: {head,tail}), each subset of outcome(event: {{},{H},{T},{H,T}}) has a probability. (probability mass function)
+- if output set is continuous(example real number), the probability for a set containing one individual member is zero and events (sets) containing infinite number of members (intervals) have probability. 
+- probability density function: describes the infinitesimal probability of any given value, and the probability that the outcome lies in a given interval can be computed by integrating the probability density function.
+- cumulative distribution function: is the area under the probability density function from -infinity to x.
+- A large family of probability distribution is exponential family: One general formula is: $f(y_i)=\exp{\frac{y_i\theta_i-b(\theta_i)}{a_i(\phi)}+c(y_i,\phi)}$
+  - Normal distribution: $Pr(y|\mu, \sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(y-\mu)^2}{2\sigma^2}}$
+  - Binomial distribution
+  - Gamma distribution
+  - Chi square distribution
+  - Poisson distribution
 #### Random numbers
 ```Python
 from numpy import random
@@ -826,3 +838,9 @@ def manufacturing_profit_scipy():
 ```
 
 ## Machine learning
+![machine learning](machinelearning1.png)
+
+![machine learning](machinelearning.png)
+
+### Generalized linear models
+
