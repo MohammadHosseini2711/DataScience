@@ -33,7 +33,7 @@
     - [Farmer's example](#farmers-example)
     - [Factory example](#factory-example)
     - [Company example 2](#company-example-2)
-- [Machine learning](#machine-learning)
+- [Data science and machine learning](#data-science-and-machine-learning)
   - [Generalized linear models](#generalized-linear-models)
 
 ## Python collection types
@@ -837,10 +837,20 @@ def manufacturing_profit_scipy():
     print("Profit:", -res.fun)
 ```
 
-## Machine learning
+## Data science and machine learning
 ![machine learning](machinelearning1.png)
 
 ![machine learning](machinelearning.png)
 
 ### Generalized linear models
-
+1. We have data for dependent variable Y and independent variables X1,X2,X3,... .
+2. We supose the data belongs to a distribution from exponential family.
+3. A function of mean of dependent variable is related to independent variable by a linear model (with respect to parameters).
+4. We convert model finding problem to an optimization problem using one of following method:
+   1. Maximum likelihood estimation method
+   2. Bayesian estimation method
+   3. Generalized method of moments (GMM)
+   4. Markov-chain monte carlo
+5. Maximum likelihood method.
+   1. In this method, the objective function for our optimization is likelihood function of the distribution.
+   2.  
