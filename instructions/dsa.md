@@ -34,7 +34,7 @@
     - [Factory example](#factory-example)
     - [Company example 2](#company-example-2)
 - [Data science and machine learning](#data-science-and-machine-learning)
-  - [Generalized linear models](#generalized-linear-models)
+  - [Generalized linear models (GLM)](#generalized-linear-models-glm)
 
 ## Python collection types
 
@@ -842,7 +842,7 @@ def manufacturing_profit_scipy():
 
 ![machine learning](machinelearning.png)
 
-### Generalized linear models
+### Generalized linear models (GLM)
 1. We have data for dependent variable Y and independent variables X1,X2,X3,... .
 2. We supose the data belongs to a distribution from exponential family.
 3. A function of mean of dependent variable is related to independent variable by a linear model (with respect to parameters).
