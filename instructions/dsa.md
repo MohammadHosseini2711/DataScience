@@ -1,8 +1,10 @@
-- [Python collection types](#python-collection-types)
-  - [List](#list)
-  - [Set](#set)
-  - [Tuple](#tuple)
-  - [Dictionary](#dictionary)
+- [Python](#python)
+  - [How to import other modules](#how-to-import-other-modules)
+  - [Python collection types](#python-collection-types)
+    - [List](#list)
+    - [Set](#set)
+    - [Tuple](#tuple)
+    - [Dictionary](#dictionary)
 - [Numpy array](#numpy-array)
   - [Anatomy of Numpy array](#anatomy-of-numpy-array)
   - [Create](#create)
@@ -36,21 +38,27 @@
 - [Data science and machine learning](#data-science-and-machine-learning)
   - [Generalized linear models (GLM)](#generalized-linear-models-glm)
 
-## Python collection types
+## Python
+### How to import other modules
+- `from package_path import *`: not recomended
+- `from package_path import function_name`
+- `import package_path`: use for short package path, example `import math`
+- `import package_path as short_name`: for example `import numpy as np`
+### Python collection types
 
-### List
+#### List
 ```Python
 # List data structure
 list = [1,2,3,4]
 print(f'List data structue example\n{list}')
 ```
-### Set
+#### Set
 ```Python
 # Set data structure : duplicate values are not allowed
 set = {1,2,3,3}
 print(f'Set data structue example\n{set}')
 ```
-### Tuple
+#### Tuple
 ```Python
 # Tuple data structure
 tuple = (1,2)
@@ -58,7 +66,7 @@ print(f'Tuple data structue example\n{tuple}')
 tuple = ("a", "b", "c")
 print(f'Tuple data structue example\n{tuple}')
 ```
-### Dictionary
+#### Dictionary
 Fast search data structure
 ```Python
 # Dictionary data strucrure : Key:Value
